@@ -1,5 +1,6 @@
 package xyz.dassiorleando.speedmentdemo.article;
 
+import com.speedment.runtime.core.exception.SpeedmentException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,9 @@ import xyz.dassiorleando.speedmentdemo.article.generated.GeneratedArticleControl
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -34,26 +35,21 @@ public class ArticleController extends GeneratedArticleController {
      * @return
      */
     @PostMapping("/articles")
-    public ArticleDTO create(@RequestBody @Valid ArticleDTO articleDTO) {
+    public Article create(@RequestBody @Valid ArticleDTO articleDTO) {
         log.debug("Create an article with the properties {}", articleDTO);
 
-        Stream.of(articleDTO)
-                .map(ln -> new ArticleImpl().setTitle(ln.getTitle()))
-                .map(ln -> new ArticleImpl().setContent(ln.getContent()))
-                .forEach(articleManager.persister());
-
-        return articleDTO;
+        // build the article before saving
+        Article article = new ArticleImpl()
+                .setTitle(articleDTO.getTitle())
+                .setContent(articleDTO.getContent())
+                .setPublishedDate(new Timestamp(System.currentTimeMillis()));
+        try {
+            articleManager.persist(article);
+        } catch (SpeedmentException se) {
+            System.out.println("Failed to persist " + article + ". " + se.getMessage());
+        }
+        return article;
     }
-
-        // Another way of creating an article
-//Article article = new ArticleImpl()
-//        .setTitle(articleDTO.getTitle())
-//        .setContent(articleDTO.getContent());
-//try {
-//    articleManager.persist(article);
-//} catch (SpeedmentException se) {
-//    System.out.println("Failed to persist " + article + ". " + se.getMessage());
-//}
 
     /**
      * To update an article
@@ -61,31 +57,22 @@ public class ArticleController extends GeneratedArticleController {
      * @return
      */
     @PutMapping("/articles")
-    public ArticleDTO update(@RequestBody @Valid ArticleDTO articleDTO) {
+    public Article update(@RequestBody @Valid ArticleDTO articleDTO) {
         log.debug("Update the article of id {} with the properties {}", articleDTO.getId(), articleDTO);
 
         // Update the article matching the incoming id
-        articleManager.stream()
+        Optional<Article> article = articleManager.stream()
                 .filter(Article.ID.equal(articleDTO.getId()))
-                .map(Article.TITLE.setTo(articleDTO.getTitle()))
-                .map(Article.CONTENT.setTo(articleDTO.getContent()))
-                .forEach(articleManager.updater());
+                .findFirst();
 
-        return articleDTO;
+        article.ifPresent(l -> {
+            l.setTitle(articleDTO.getTitle());
+            l.setContent(articleDTO.getContent());
+            articleManager.update(l);
+        });
 
+        return article.orElse(null);
     }
-
-        // Another way of updating an article
-//        Optional<Article> article = articleManager.stream()
-//                .filter(Article.ID.equal(articleDTO.getId()))
-//                .findFirst();
-//
-//        article.ifPresent(l -> {
-//            l.setTitle(articleDTO.getTitle());
-//            l.setContent(articleDTO.getContent());
-//            articleManager.update(l);
-//        });
-//        return article.get();
 
     /**
      * Get the list of all saved articles

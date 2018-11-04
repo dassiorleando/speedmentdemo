@@ -7,11 +7,10 @@ import javax.validation.constraints.NotNull;
  * @author dassiorleando
  */
 public class ArticleDTO {
-    private int id;
+    private int id = -1;
     @NotNull
     private String title;
     private String content;
-    private String author;
 
     public ArticleDTO() {
     }
@@ -40,21 +39,12 @@ public class ArticleDTO {
         this.content = content;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     @Override
     public String toString() {
         return "ArticleDTO{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", author='" + author + '\'' +
                 '}';
     }
 }
