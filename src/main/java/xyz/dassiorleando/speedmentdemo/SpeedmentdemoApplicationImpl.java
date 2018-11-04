@@ -8,7 +8,7 @@ import xyz.dassiorleando.speedmentdemo.generated.GeneratedSpeedmentdemoApplicati
  * <p>
  * This file is safe to edit. It will not be overwritten by the code generator.
  * 
- * @author company
+ * @author dassiorleando
  */
 public final class SpeedmentdemoApplicationImpl 
 extends GeneratedSpeedmentdemoApplicationImpl

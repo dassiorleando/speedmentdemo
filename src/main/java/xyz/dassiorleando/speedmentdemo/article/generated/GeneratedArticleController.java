@@ -17,7 +17,7 @@ import xyz.dassiorleando.speedmentdemo.article.Article;
 import xyz.dassiorleando.speedmentdemo.article.ArticleManager;
 import xyz.dassiorleando.speedmentdemo.article.generated.GeneratedArticle.Identifier;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
@@ -61,7 +61,7 @@ public abstract class GeneratedArticleController {
             @RequestParam(name = "sort", defaultValue = "[]") String sorters,
             @RequestParam(value = "start", defaultValue = "0") long start,
             @RequestParam(value = "limit", defaultValue = "25") long limit) {
-        
+
         return getHelper(
             ControllerUtil.parseFilters(filters, ArticleFilter::new).collect(toList()),
             ControllerUtil.parseSorts(sorters, ArticleSort::new).collect(toList()),
@@ -69,7 +69,7 @@ public abstract class GeneratedArticleController {
             limit
         );
     }
-    
+
     protected final Set<Identifier> parseColumns(String jsonColumnList) {
         try {
             @SuppressWarnings("unchecked")
@@ -195,7 +195,7 @@ public abstract class GeneratedArticleController {
                     }
                 }
                 case "publishedDate" : {
-                    final LocalDateTime v = LocalDateTime.parse(value());
+                    final Timestamp v = Timestamp.valueOf(value());
                     switch (operator()) {
                         case "eq"   : return Article.PUBLISHED_DATE.equal(v);
                         case "ne"   : return Article.PUBLISHED_DATE.notEqual(v);

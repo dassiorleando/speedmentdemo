@@ -23,7 +23,7 @@ import static java.util.Collections.unmodifiableList;
 @GeneratedCode("Speedment")
 public interface GeneratedArticleManager extends Manager<Article> {
     
-    TableIdentifier<Article> IDENTIFIER = TableIdentifier.of("speedmentdemo", "speedmentdemo", "xyz/dassiorleando/speedmentdemo/article");
+    TableIdentifier<Article> IDENTIFIER = TableIdentifier.of("speedmentdemo", "speedmentdemo", "article");
     List<Field<Article>> FIELDS = unmodifiableList(asList(
         Article.ID,
         Article.TITLE,

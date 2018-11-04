@@ -26,7 +26,7 @@ implements GeneratedArticleManager {
     private final TableIdentifier<Article> tableIdentifier;
     
     protected GeneratedArticleManagerImpl() {
-        this.tableIdentifier = TableIdentifier.of("speedmentdemo", "speedmentdemo", "xyz/dassiorleando/speedmentdemo/article");
+        this.tableIdentifier = TableIdentifier.of("speedmentdemo", "speedmentdemo", "article");
     }
     
     @Override

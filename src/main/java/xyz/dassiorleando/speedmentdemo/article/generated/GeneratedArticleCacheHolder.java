@@ -3,6 +3,7 @@ package xyz.dassiorleando.speedmentdemo.article.generated;
 import com.speedment.common.annotation.GeneratedCode;
 import com.speedment.common.tuple.Tuple2;
 import com.speedment.common.tuple.Tuples;
+import com.speedment.enterprise.datastore.runtime.HasStatistics.Statistics;
 import com.speedment.enterprise.datastore.runtime.entitystore.EntityStore;
 import com.speedment.enterprise.datastore.runtime.entitystore.EntityStoreHolder;
 import com.speedment.enterprise.datastore.runtime.fieldcache.FieldCache.OfComparable;
@@ -19,12 +20,13 @@ import com.speedment.runtime.config.identifier.ColumnIdentifier;
 import com.speedment.runtime.config.identifier.ColumnLabel;
 import com.speedment.runtime.config.identifier.TableIdentifier;
 import com.speedment.runtime.core.component.StreamSupplierComponent;
+import com.speedment.runtime.field.Field;
 import com.speedment.runtime.field.trait.HasIdentifier;
 import xyz.dassiorleando.speedmentdemo.article.Article;
 import xyz.dassiorleando.speedmentdemo.article.ArticleEntityStoreSerializerImpl;
 import xyz.dassiorleando.speedmentdemo.article.ArticleManager;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -56,14 +58,14 @@ public final class GeneratedArticleCacheHolder implements EntityStoreHolder<Arti
     private final OfInt fieldIdCache;
     private final OfString fieldTitleCache;
     private final OfString fieldContentCache;
-    private final OfComparable<LocalDateTime> fieldPublishedDateCache;
+    private final OfComparable<Timestamp> fieldPublishedDateCache;
     
     public GeneratedArticleCacheHolder(
             EntityStore<Article> entityStore,
             OfInt fieldIdCache,
             OfString fieldTitleCache,
             OfString fieldContentCache,
-            OfComparable<LocalDateTime> fieldPublishedDateCache) {
+            OfComparable<Timestamp> fieldPublishedDateCache) {
         
         this.entityStore             = requireNonNull(entityStore);
         this.fieldIdCache            = requireNonNull(fieldIdCache);
@@ -119,7 +121,7 @@ public final class GeneratedArticleCacheHolder implements EntityStoreHolder<Arti
             streamSupplier,
             executor,
             ArticleEntityStoreSerializerImpl::new,
-            TableIdentifier.of("speedmentdemo", "speedmentdemo", "xyz/dassiorleando/speedmentdemo/article")
+            TableIdentifier.of("speedmentdemo", "speedmentdemo", "article")
         ), executor);
     }
     
@@ -174,7 +176,7 @@ public final class GeneratedArticleCacheHolder implements EntityStoreHolder<Arti
         final CompletableFuture<FieldCache.OfString> fieldContentCacheFuture =
             DataStoreHolderUtil.buildStringCache(entityStoreFuture, executor, Article.CONTENT, 0);
         
-        final CompletableFuture<FieldCache.OfComparable<LocalDateTime>> fieldPublishedDateCacheFuture =
+        final CompletableFuture<FieldCache.OfComparable<Timestamp>> fieldPublishedDateCacheFuture =
             DataStoreHolderUtil.buildComparableCache(entityStoreFuture, executor, Article.PUBLISHED_DATE, 0);
         
         return entityStoreFuture.thenApplyAsync(entityStore -> {

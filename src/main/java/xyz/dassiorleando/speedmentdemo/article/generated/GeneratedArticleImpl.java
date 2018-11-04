@@ -3,7 +3,7 @@ package xyz.dassiorleando.speedmentdemo.article.generated;
 import com.speedment.common.annotation.GeneratedCode;
 import xyz.dassiorleando.speedmentdemo.article.Article;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -22,7 +22,7 @@ public abstract class GeneratedArticleImpl implements Article {
     private int id;
     private String title;
     private String content;
-    private LocalDateTime publishedDate;
+    private Timestamp publishedDate;
     
     protected GeneratedArticleImpl() {}
     
@@ -42,7 +42,7 @@ public abstract class GeneratedArticleImpl implements Article {
     }
     
     @Override
-    public LocalDateTime getPublishedDate() {
+    public Timestamp getPublishedDate() {
         return publishedDate;
     }
     
@@ -65,7 +65,7 @@ public abstract class GeneratedArticleImpl implements Article {
     }
     
     @Override
-    public Article setPublishedDate(LocalDateTime publishedDate) {
+    public Article setPublishedDate(Timestamp publishedDate) {
         this.publishedDate = publishedDate;
         return this;
     }

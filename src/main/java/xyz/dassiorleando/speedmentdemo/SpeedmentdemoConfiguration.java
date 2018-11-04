@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
  * <p>
  * This file is safe to edit. It will not be overwritten by the code generator.
  * 
- * @author company
+ * @author dassiorleando
  */
 @Configuration
 public class SpeedmentdemoConfiguration extends GeneratedSpeedmentdemoConfiguration {}

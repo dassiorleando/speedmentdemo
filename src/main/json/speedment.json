@@ -64,7 +64,8 @@
                     "name" : "content",
                     "nullableImplementation" : "OPTIONAL",
                     "id" : "content",
-                    "hashIndex" : false
+                    "hashIndex" : false,
+                    "restVisible" : true
                   },
                   {
                     "nameProtected" : true,
@@ -77,12 +78,12 @@
                     "enabled" : true,
                     "databaseType" : "java.sql.Timestamp",
                     "expanded" : true,
-                    "typeMapper" : "com.speedment.runtime.typemapper.time.TimestampToLocalDateTimeMapper",
                     "name" : "published_date",
                     "nullableImplementation" : "OPTIONAL",
                     "alias" : "publishedDate",
                     "id" : "published_date",
-                    "hashIndex" : false
+                    "hashIndex" : false,
+                    "restVisible" : true
                   }
                 ],
                 "enabled" : true,
@@ -123,7 +124,7 @@
                 "restEnableSkipLimit" : true,
                 "restCors" : "*",
                 "id" : "article",
-                "packageName" : "xyz.dassiorleando.article",
+                "packageName" : "xyz.dassiorleando.speedmentdemo.article",
                 "restEnableSorters" : true,
                 "restEnableTotal" : false
               }

@@ -16,14 +16,13 @@ import com.speedment.enterprise.datastore.runtime.entitystore.function.EntitySto
 import com.speedment.enterprise.datastore.runtime.internal.throwable.Utf8Exception;
 import com.speedment.enterprise.datastore.runtime.throwable.DeserializationException;
 import com.speedment.enterprise.datastore.runtime.util.SerializerUtil;
-import com.speedment.enterprise.datastore.runtime.util.TimeUtil;
 import com.speedment.enterprise.datastore.runtime.util.Utf8Util;
 import com.speedment.runtime.config.identifier.ColumnIdentifier;
 import xyz.dassiorleando.speedmentdemo.article.Article;
 import xyz.dassiorleando.speedmentdemo.article.ArticleImpl;
 
 import java.nio.ByteBuffer;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.LongConsumer;
@@ -65,7 +64,7 @@ public abstract class GeneratedArticleEntityStoreSerializerImpl implements Entit
         return (buffer, entity) -> {
             int varSizePos = 0;
             buffer.putInt(FIELD_ID, entity.getId());
-            buffer.putLong(FIELD_PUBLISHED_DATE, TimeUtil.localDateTimeToMillis(entity.getPublishedDate()));
+            buffer.putLong(FIELD_PUBLISHED_DATE, entity.getPublishedDate().getTime());
             varSizePos += ByteBufferUtil.putArrayAbsolute(buffer, VARSIZE_BEGINS + varSizePos, entity.getTitle().getBytes());
             buffer.putInt(ENDPOS_TITLE, varSizePos);
             varSizePos += ByteBufferUtil.putArrayAbsolute(buffer, VARSIZE_BEGINS + varSizePos, entity.getContent().getBytes());
@@ -105,7 +104,7 @@ public abstract class GeneratedArticleEntityStoreSerializerImpl implements Entit
                 final LongToIntFunction sizeOf = sizeOf();
                 throw new DeserializationException(buffer, offset, sizeOf.applyAsInt(ref), ex);
             }
-            entity.setPublishedDate(TimeUtil.millisToLocalDateTime(buffer.getLong(offset + FIELD_PUBLISHED_DATE)));
+            entity.setPublishedDate(new Timestamp(buffer.getLong(offset + FIELD_PUBLISHED_DATE)));
             return entity;
         };
     }
@@ -116,7 +115,7 @@ public abstract class GeneratedArticleEntityStoreSerializerImpl implements Entit
             final Article.Identifier _id = (Article.Identifier) colId;
             switch (_id) {
                 case ID             : return int.class;
-                case PUBLISHED_DATE : return LocalDateTime.class;
+                case PUBLISHED_DATE : return Timestamp.class;
                 case TITLE          : 
                 case CONTENT        : return String.class;
                 default : {
@@ -129,7 +128,7 @@ public abstract class GeneratedArticleEntityStoreSerializerImpl implements Entit
             final String _colName = colId.getColumnId();
             switch (_colName) {
                 case "id"             : return int.class;
-                case "published_date" : return LocalDateTime.class;
+                case "published_date" : return Timestamp.class;
                 case "title"          : 
                 case "content"        : return String.class;
                 default : {
@@ -283,7 +282,7 @@ public abstract class GeneratedArticleEntityStoreSerializerImpl implements Entit
         if (colId instanceof Article.Identifier) {
             final Article.Identifier _id = (Article.Identifier) colId;
             switch (_id) {
-                case PUBLISHED_DATE : return ref -> TimeUtil.millisToLocalDateTime(bufferFinder.apply(ref).getLong(offsetFinder.applyAsInt(ref) + FIELD_PUBLISHED_DATE));
+                case PUBLISHED_DATE : return ref -> new Timestamp(bufferFinder.apply(ref).getLong(offsetFinder.applyAsInt(ref) + FIELD_PUBLISHED_DATE));
                 case TITLE          : return ref -> {
                     final ByteBuffer buffer = bufferFinder.apply(ref);
                     final int offset = offsetFinder.applyAsInt(ref);
@@ -319,7 +318,7 @@ public abstract class GeneratedArticleEntityStoreSerializerImpl implements Entit
         } else {
             final String _colName = colId.getColumnId();
             switch (_colName) {
-                case "published_date" : return ref -> TimeUtil.millisToLocalDateTime(bufferFinder.apply(ref).getLong(offsetFinder.applyAsInt(ref) + FIELD_PUBLISHED_DATE));
+                case "published_date" : return ref -> new Timestamp(bufferFinder.apply(ref).getLong(offsetFinder.applyAsInt(ref) + FIELD_PUBLISHED_DATE));
                 case "title"          : return ref -> {
                     final ByteBuffer buffer = bufferFinder.apply(ref);
                     final int offset = offsetFinder.applyAsInt(ref);
@@ -617,7 +616,7 @@ public abstract class GeneratedArticleEntityStoreSerializerImpl implements Entit
             final Article.Identifier _id = (Article.Identifier) colId;
             switch (_id) {
                 case PUBLISHED_DATE : {
-                    final long operand = TimeUtil.localDateTimeToMillis(((LocalDateTime) value));
+                    final long operand = ((Timestamp) value).getTime();
                     return ref -> Long.compare(
                         bufferFinder.apply(ref).getLong(offsetFinder.applyAsInt(ref) + FIELD_PUBLISHED_DATE),
                         operand
@@ -659,7 +658,7 @@ public abstract class GeneratedArticleEntityStoreSerializerImpl implements Entit
             final String _colName = colId.getColumnId();
             switch (_colName) {
                 case "published_date" : {
-                    final long operand = TimeUtil.localDateTimeToMillis(((LocalDateTime) value));
+                    final long operand = ((Timestamp) value).getTime();
                     return ref -> Long.compare(
                         bufferFinder.apply(ref).getLong(offsetFinder.applyAsInt(ref) + FIELD_PUBLISHED_DATE),
                         operand

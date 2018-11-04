@@ -8,8 +8,6 @@ import xyz.dassiorleando.speedmentdemo.article.generated.GeneratedArticleManager
  * <p>
  * This file is safe to edit. It will not be overwritten by the code generator.
  * 
- * @author company
+ * @author dassiorleando
  */
-public final class ArticleManagerImpl 
-extends GeneratedArticleManagerImpl 
-implements ArticleManager {}
+public final class ArticleManagerImpl extends GeneratedArticleManagerImpl implements ArticleManager {}
