@@ -1,0 +1,154 @@
+{
+  "config" : {
+    "speedmentVersion" : "Speedment:3.1.7",
+    "nameProtected" : false,
+    "jsonp" : false,
+    "companyName" : "company",
+    "packageLocation" : "src/main/java/",
+    "dbmses" : [
+      {
+        "expanded" : true,
+        "port" : 3306,
+        "schemas" : [
+          {
+            "nameProtected" : true,
+            "tables" : [
+              {
+                "nameProtected" : true,
+                "isView" : false,
+                "columns" : [
+                  {
+                    "nameProtected" : true,
+                    "nullable" : false,
+                    "unindexed" : false,
+                    "lowCardinality" : false,
+                    "autoIncrement" : true,
+                    "biDirectional" : false,
+                    "ordinalPosition" : 1,
+                    "enabled" : true,
+                    "databaseType" : "java.lang.Integer",
+                    "expanded" : true,
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
+                    "name" : "id",
+                    "nullableImplementation" : "OPTIONAL",
+                    "id" : "id",
+                    "hashIndex" : false
+                  },
+                  {
+                    "nameProtected" : true,
+                    "nullable" : false,
+                    "unindexed" : false,
+                    "lowCardinality" : false,
+                    "autoIncrement" : false,
+                    "biDirectional" : false,
+                    "ordinalPosition" : 2,
+                    "enabled" : true,
+                    "databaseType" : "java.lang.String",
+                    "expanded" : true,
+                    "name" : "title",
+                    "nullableImplementation" : "OPTIONAL",
+                    "id" : "title",
+                    "hashIndex" : false
+                  },
+                  {
+                    "nameProtected" : true,
+                    "nullable" : false,
+                    "unindexed" : false,
+                    "lowCardinality" : false,
+                    "autoIncrement" : false,
+                    "biDirectional" : false,
+                    "ordinalPosition" : 3,
+                    "enabled" : true,
+                    "databaseType" : "java.lang.String",
+                    "expanded" : true,
+                    "name" : "content",
+                    "nullableImplementation" : "OPTIONAL",
+                    "id" : "content",
+                    "hashIndex" : false
+                  },
+                  {
+                    "nameProtected" : true,
+                    "nullable" : false,
+                    "unindexed" : false,
+                    "lowCardinality" : false,
+                    "autoIncrement" : false,
+                    "biDirectional" : false,
+                    "ordinalPosition" : 4,
+                    "enabled" : true,
+                    "databaseType" : "java.sql.Timestamp",
+                    "expanded" : true,
+                    "typeMapper" : "com.speedment.runtime.typemapper.time.TimestampToLocalDateTimeMapper",
+                    "name" : "published_date",
+                    "nullableImplementation" : "OPTIONAL",
+                    "alias" : "publishedDate",
+                    "id" : "published_date",
+                    "hashIndex" : false
+                  }
+                ],
+                "enabled" : true,
+                "restEnableFilters" : true,
+                "expanded" : true,
+                "restEnabled" : true,
+                "primaryKeyColumns" : [
+                  {
+                    "nameProtected" : false,
+                    "expanded" : true,
+                    "name" : "id",
+                    "id" : "id",
+                    "ordinalPosition" : 1,
+                    "enabled" : true
+                  }
+                ],
+                "indexes" : [
+                  {
+                    "nameProtected" : true,
+                    "expanded" : false,
+                    "unique" : true,
+                    "name" : "PRIMARY",
+                    "indexColumns" : [
+                      {
+                        "orderType" : "ASC",
+                        "expanded" : true,
+                        "name" : "id",
+                        "id" : "id",
+                        "ordinalPosition" : 1
+                      }
+                    ],
+                    "id" : "PRIMARY",
+                    "enabled" : true
+                  }
+                ],
+                "name" : "article",
+                "restPath" : "/articles",
+                "restEnableSkipLimit" : true,
+                "restCors" : "*",
+                "id" : "article",
+                "packageName" : "xyz.dassiorleando.article",
+                "restEnableSorters" : true,
+                "restEnableTotal" : false
+              }
+            ],
+            "expanded" : true,
+            "restEnabled" : true,
+            "name" : "speedmentdemo",
+            "restPath" : "",
+            "id" : "speedmentdemo",
+            "enabled" : true
+          }
+        ],
+        "typeName" : "MySQL",
+        "ipAddress" : "127.0.0.1",
+        "name" : "speedmentdemo",
+        "id" : "speedmentdemo",
+        "enabled" : true,
+        "username" : "root"
+      }
+    ],
+    "enabled" : true,
+    "expanded" : true,
+    "appId" : "f0f34c3c-4895-4d57-908a-2938788e9637",
+    "name" : "speedmentdemo",
+    "id" : "speedmentdemo",
+    "jsonpCallbackName" : "callback"
+  }
+}
