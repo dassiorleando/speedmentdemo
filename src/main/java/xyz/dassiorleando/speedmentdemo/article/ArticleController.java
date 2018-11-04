@@ -91,7 +91,7 @@ public class ArticleController extends GeneratedArticleController {
      */
     @GetMapping("/articles/{id}")
     public Article findById(@PathVariable @NotNull int id) {
-        log.debug("Load the article by id: {}", id);
+        log.debug("Get an article by the id: {}", id);
         return articleManager.stream().filter(Article.ID.equal(id)).findAny().orElse(null);
     }
 
@@ -101,14 +101,14 @@ public class ArticleController extends GeneratedArticleController {
      */
     @DeleteMapping("/articles/{id}")
     public void deleteById(@PathVariable @NotNull int id) {
-        log.debug("Delete the article of title: {}", id);
+        log.debug("Delete the article of id: {}", id);
 
-        // first look for the corresponding article
+        // First, we look for the corresponding article
         Optional<Article> article = articleManager.stream()
                 .filter(Article.ID.equal(id))
                 .findFirst();
 
-        // Perform deletion
+        // Perform the deletion
         article.ifPresent(l -> articleManager.remove(l));
     }
 
